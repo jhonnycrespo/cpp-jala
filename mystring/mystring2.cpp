@@ -124,44 +124,20 @@ private:
 int main()
 {
     MyString s;
-
     MyString s2 = "Hola Mundo";
+
+
+    // Estos tres hacen lo mismo
+    MyString s3("Hola Mundo");
+    // Es recomendable usar llaves
+    MyString s3 {"Hola Mundo"};
+    MyString s3 =  {"Hola Mundo"};
+
 
     MyString s4 = "Jigsaw IT StarWars Annabelle";
 
     puts(s.c_str());
     puts(s2.c_str());
     puts(s4.c_str());
-
-    MyString s5 = s4;
-
-    s5.show();
-
-    s5 = s2;
-
-    s5.show();
-
-    MyString p = "hello";
-    MyString q = "world";
-
-    auto r = p + q;
-
-    r.show();
-
-    r = r + " of software developers";
-    r.show();
-
-    MyString u = "hello";   
-    // No tenemos un constructor para esto. Por que funciona?
-    // El compilador construye MyString con "friends".
-    auto v = u + "friends";
-
-    v.show();
-
-    // Por que no funciona?? Porque hello es const char* y lo podemos implementar
-    // afuera recibiendo un (const char*, MyString).
-    // auto z = "hello" + v;
-    
-    auto rr = u.operator+("Of C++");
-    rr.show();
+    puts(s3.c_str());
 }

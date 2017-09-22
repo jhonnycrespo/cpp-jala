@@ -79,6 +79,53 @@ public:
 
     }
 
+    MyString& operator+=(const MyString& x)
+    {
+        auto nlen = len + x.len;
+
+        if (nlen < MAX_LEN)
+        {
+            memcpy(data.sso + len, x.c_str(), x.len + 1);
+            len = nlen;
+            return *this;
+        }
+
+        // si esta en el stack, hay q crear un espacio en el heap y concatenar x.c_str()
+        if (len < MAX_LEN)
+        {
+            char* nstr = (char*) malloc(nlen + 1);
+            memcpy(nstr, data.sso, len);
+            memcpy(nstr + len, x.c_str(), x.len + 1);
+            data.str = nstr;
+            len = nlen;
+
+            return *this;
+        }
+
+        // si ya esta en el heap, solo hay que agrandar el espacio en memoria y
+        // concatenar x.c_str()
+        data.str = (char*) realloc(data.str, nlen + 1);
+        memcpy(data.str + len, x.c_str(), x.len + 1);
+        len = nlen;
+
+        return *this;
+    }
+
+    // const porque no cambiamos el this
+    bool operator==(const MyString& x) const
+    {
+        // si apuntan a la misma direccion
+        // this me devuelve dir de memoria
+        if (this == &x)
+            return true;
+
+        if (len != x.len)
+            return false;
+
+        return memcmp(c_str(), x.c_str(), len) == 0;
+
+    }
+
     const char* c_str() const
     {
         return len >= MAX_LEN ? data.str : data.sso;
@@ -123,45 +170,27 @@ private:
 
 int main()
 {
-    MyString s;
+    MyString x = "hello world";
 
-    MyString s2 = "Hola Mundo";
+    x += " of programmers";
 
-    MyString s4 = "Jigsaw IT StarWars Annabelle";
+    x.show();
 
-    puts(s.c_str());
-    puts(s2.c_str());
-    puts(s4.c_str());
+    MyString a = "juanito";
+    MyString b = "juanito";
 
-    MyString s5 = s4;
+    if (a == b)
+    {
+        puts("son iguales");
+    }
+    else {
+        puts("no son iguales");
+    }
 
-    s5.show();
+    MyString c = "hola";
+    MyString& q = c;
 
-    s5 = s2;
+    if (c == q)
+        puts("iguales");
 
-    s5.show();
-
-    MyString p = "hello";
-    MyString q = "world";
-
-    auto r = p + q;
-
-    r.show();
-
-    r = r + " of software developers";
-    r.show();
-
-    MyString u = "hello";   
-    // No tenemos un constructor para esto. Por que funciona?
-    // El compilador construye MyString con "friends".
-    auto v = u + "friends";
-
-    v.show();
-
-    // Por que no funciona?? Porque hello es const char* y lo podemos implementar
-    // afuera recibiendo un (const char*, MyString).
-    // auto z = "hello" + v;
-    
-    auto rr = u.operator+("Of C++");
-    rr.show();
 }
