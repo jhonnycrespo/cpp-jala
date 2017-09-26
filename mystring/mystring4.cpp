@@ -1,6 +1,7 @@
 #include <cstring>
 #include <cstdlib>
 #include <cstdio>
+#include <iostream>
 
 /**
  * Small String Optimization
@@ -10,6 +11,10 @@
 // MAX_LEN se conoce en tiempo de compilacion
 constexpr size_t MAX_LEN = 16;
 
+using namespace std;
+
+// Esto es practicamente lo mismo que una clase. La unica diferencia
+// es que los modificares de acceso de las variables y metodos siempre son publicos.
 struct MyStringReverseIterator
 {
     const char* s;
@@ -27,12 +32,13 @@ struct MyStringReverseIterator
     // ++i
     MyStringReverseIterator& operator++()
     {
+        // --s decrementa y devuelve el valor decrementado
         --s;
         return *this;
     }
 
-    //i++
-    //int no sirve de ndaa. solo para que el compilador sepa que este es el i++
+    // i++
+    //int no sirve de nada. solo para que el compilador sepa que este es el i++
     MyStringReverseIterator operator++(int)
     {
         // creamos una copia de this
@@ -65,6 +71,8 @@ public:
 
     MyString(const char* s = "")
     {
+        puts("constructor has been called");
+        // strlen no considera el caracter '\0'
         init_str(s, strlen(s));
     }
 
@@ -113,7 +121,6 @@ public:
         memcpy(aux + len, src.data.sso, src.len + 1);
 
         return MyString {aux};
-
     }
 
     MyString& operator+=(const MyString& x)
@@ -236,11 +243,14 @@ private:
 
         if (len >= MAX_LEN)
         {
+            // +1 para el caracter '\0'
             data.str = (char*) malloc(len + 1);
+            // + para el caracter '\0'
             memcpy(data.str, s, len + 1);
         }
         else
         {
+            // + para el caracter '\0'
             memcpy(data.sso, s, len + 1);
         }
     }
@@ -248,6 +258,8 @@ private:
 
 int main()
 {
+    // no llama al metodo operator=
+    // llama al constructor
     MyString y = "Wilster-River";
     auto len = y.length();
 
@@ -258,15 +270,23 @@ int main()
         printf("%c\n", y[i]);
     }
 
-    y[0] = 'A';
+    // y[0] = 'A';
+    
+    cout << "-------------" << endl;
 
+    // llama al constructor
     const MyString ppp = "hola";
-    printf("%c\n", ppp[2]);
+    // printf("%c\n", ppp[2]);
+    
+    cout << "-------------" << endl;
 
+    // llama al constructor
     MyString ddd = "Todos somos Negan";
 
+    // tambien funciona usando k. Entonces porque usar &k??
     for (auto &k : ddd)
     {
+        printf("%zu", sizeof(k));
         printf("%c\n", k);
     }
 
@@ -277,11 +297,11 @@ int main()
     //     printf("%d\n", k);
     // }
 
+    // llama al constructor
     MyString xyz = "Lucille";
 
     for (MyString::reverse_iterator i = xyz.rbegin(); i != xyz.rend(); ++i)
     {
         printf("%c\n", *i);
     }
-
 }
