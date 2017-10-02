@@ -6,6 +6,9 @@ struct Pair
     int y;
 };
 
+// Tambien funciona recibien (const Pair x, const Pair y)
+// Entonces, porque usar referencias?? solo se me ocurre
+// que es para no crear copias de los objetos y hacer el programa mas eficiente
 Pair operator+(const Pair& x, const Pair& y)
 {
     // Esto es posible en c++

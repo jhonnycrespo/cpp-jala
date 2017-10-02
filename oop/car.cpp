@@ -37,11 +37,11 @@ public:
         puts("Bye again");
     }
 
-    // Constructor copia - Recibe como parametros una referencia a si mismo.
+    // Constructor copia - Recibe como parametro una referencia a si mismo - "this".
     CarInfo(const CarInfo& src) : brand {ns(src.brand)}, model {ns(src.model)}, year {src.year}
     {}
 
-    // Aqui no podemos usar :, esto solo esta disponible para el constructor.
+    // Aqui no podemos usar : esto solo esta disponible para el constructor.
     CarInfo& operator=(const CarInfo& c)
     {
         // en caso de a = a
