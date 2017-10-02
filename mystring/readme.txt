@@ -6,6 +6,13 @@ The ‘this’ pointer is passed as a hidden argument to all nonstatic member fu
 For a class X, the type of this pointer is ‘X* const’. Also, if a member function of X is declared as const, then the type of this pointer is ‘const X *const’
 
 
+=======
+struct vs class
+===============
+
+In C++, structs and classes are pretty much the same; the only difference is that where access modifiers (for member variables, methods, and base classes) in classes default to private, access modifiers in structs default to public.
+
+However, in C, a struct is just an aggregate collection of (public) data, and has no other class-like features: no methods, no constructor, no base classes, etc. Although C++ inherited the keyword, it extended the semantics. (This, however, is why things default to public in structs—a struct written like a C struct behaves like one.)
 
 
 const vs  consexpr
@@ -94,3 +101,49 @@ A "const function", denoted with the keyword const after a function declaration,
 
 
 When you add the const keyword to a method the "this" pointer will essentially become const, and you can therefore not change any member data. (Unless you use mutable, more on that later).
+
+
+
+
+
+https://stackoverflow.com/questions/4172722/what-is-the-rule-of-three
+
+If your class needs any of:
+
+    - a copy constructor,
+    - an assignment operator,
+    - or a destructor,
+
+defined explictly, then it is likely to need all three of them
+
+
+
+
+
+
+
+
+memcpy
+======
+
+void* memcpy (void* destination, const void* source, size_t num);
+
+    - The function does not check for any terminating null character in source - it always copies exactly num bytes.
+
+    - num: Number of bytes to copy.
+
+
+strlen
+=======
+
+size_t strlen (const char* str);
+
+    - The length of a str string is determined by the terminating null-character: A str string is as long as the number of characters between the beginning of the string and the terminating null character (without including the terminating null character itself).
+
+
+
+
+
+
+
+https://stackoverflow.com/questions/24853/what-is-the-difference-between-i-and-i
