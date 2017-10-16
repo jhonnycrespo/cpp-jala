@@ -15,7 +15,7 @@ struct Comparator
     }
 };
 
-// Este struct es una especializacion.
+// Este struct es una especializacion. Solo para tipos X
 template <>
 struct Comparator<X>
 {

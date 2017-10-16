@@ -49,6 +49,7 @@ struct NewAllocator
 
         auto nd = new T[n*2];
 
+        // movemos el contenido de "d" a "nd"
         for (auto i = 0U; i < n; i++)
         {
             nd[i] = d[i];
@@ -116,7 +117,6 @@ int main()
     ArrayList<int, MallocAllocator<int>> x;
     x.add(10).add(15).add(45).add(10).add(18);
     x.iterate(show);
-
 
     // este usa NewAllocator
     ArrayList<string> y;

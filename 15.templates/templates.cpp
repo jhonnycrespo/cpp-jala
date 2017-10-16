@@ -42,19 +42,18 @@ int main()
     double q = sum(6.4, 9.6);
 
     // genera una funcion sum<Int>
-    // Int x = sum(Int{6}, Int{5});
+    Int x = sum(Int{6}, Int{5});
+    printf("%d %f %d\n", p, q, x.n);
 
-    // printf("%d %f %d\n", p, q, x.n);
-
+    // este usa el template: template <typename T, typename U>
     double m = sum(6, 14.2);
     printf("%f\n", m);
 
+    // le decimos explicitamente al compilador q use el template: <typename T, typename U>
     // el compilador hace el casting a float.
     float f = sum<float, float>(8, 4);
     printf("%f\n", f);
 
-    // repeat();
-    
     // los datos que se pasan a <> se evalua en tiempo de compilacion.
     repeat<5, '*'>();
 }
