@@ -33,6 +33,7 @@ struct Node
 };
 
 template <typename K, typename V, typename Comparator = LessThan<K>>
+// template <typename K, typename V, typename Comparator>
 class BST
 {
 public:
@@ -82,7 +83,7 @@ public:
         return find_r(key, root);
     }
 
-    const V& find_r(const K& key, Node<K, V>*& node)
+    const V& find_r(const K& key, Node<K, V>*& node) const
     {
         if (node == nullptr)
             throw "key not found";
@@ -117,6 +118,7 @@ int main()
 {
     // usara por defecto LessThan
     BST<int, string> bst;
+    // BST<int, string, LessThan<int>> bst;
     bst.add(1, "The fellowship of the ring");
     bst.add(2, "The two towers");
     bst.add(3, "The return of the king");
