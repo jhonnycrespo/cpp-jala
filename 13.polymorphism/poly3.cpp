@@ -6,9 +6,10 @@ struct A /* Deberia ser final */
 {
     int x;
 
-    ~A()
+    // ~A()
+    virtual ~A()
     {
-        puts("bye");
+        puts("bye A");
     }
 };
 
@@ -32,8 +33,11 @@ int main()
 
     printf("%d\n", a->x);
 
+    // es necesario castear porque la clase padre no tiene este metodo.
     ((B*) a)->p();
 
-    // por que crashea?
+    // por que crashea? porque el destructor de A no esta marcado
+    // como virtual, si usamos polimorfismo siempre debes marcar
+    // el destructor de la clase base como virtual.
     delete a;
 }

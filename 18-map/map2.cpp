@@ -6,31 +6,31 @@ using namespace std;
 
 struct ci
 {
-    int n;
-    string c;
+    int num;
+    string city;
 };
 
 // sobrecargamos el operador <
 bool operator<(const ci& a, const ci& b)
 {
-    // if (a.n < b.n)
+    // if (a.num < b.num)
     //     return true;
 
-    // if (a.n > b.n)
+    // if (a.num > b.num)
     //     return false;
 
-    // return a.c < b.c;
+    // return a.city < b.city;
     
-    return tie(a.n, a.c) < tie(b.n, b.c);
+    return tie(a.num, a.city) < tie(b.num, b.city);
 }
 
 struct ci_comp
 {
     bool operator()(const ci& a, const ci& b) const
     {
-        return tie(a.c, a.n) < tie(b.c, b.n);
+        return tie(a.city, a.num) < tie(b.city, b.num);
     }
-}
+};
 
 int main()
 {
@@ -46,6 +46,6 @@ int main()
 
     for (auto& i: x)
     {
-        cout << i.first.n << " " << i.first.c << " " << i.second << "\n";
+        cout << i.first.num << " " << i.first.city << " " << i.second << "\n";
     }
 }

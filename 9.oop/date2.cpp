@@ -2,7 +2,7 @@
 
 struct Date
 {
-    // A las funciones que estan dentro de la clase o estructuras se llaman metodos o functiones miembrosssssss
+    // A las funciones que estan dentro de la clase o estructuras se llaman metodos o functiones miembros
     int d, m, y;
 
     void show() const

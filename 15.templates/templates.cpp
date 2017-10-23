@@ -18,6 +18,9 @@ T sum(T a, T b)
     return a + b;
 }
 
+// decltype inspecciona el tipo declarado de una entidad
+// o el tipo de una expresion.
+// En este caso el tipo de retorno depende del tipo de los parametros.
 template <typename T, typename U>
 auto sum(T a, U b) -> decltype(a + b)
 {
